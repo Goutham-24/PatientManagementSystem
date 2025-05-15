@@ -27,7 +27,6 @@ public class ControllerPatient {
     @Autowired
     PatientService patientServices;
 
-
     @PostMapping("/NewPatient")
     public ResponseEntity<String> addPatientToDoctor(@Valid @RequestBody PatientDto patients,Principal prince){
         String user = prince.getName();
