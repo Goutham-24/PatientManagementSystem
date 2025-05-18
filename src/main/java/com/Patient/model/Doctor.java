@@ -15,10 +15,10 @@ public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String emailId;
+    private String doctorName;
+    private String doctorEmailId;
     private String specialization;
-    private String phoneNumber;
+    private String doctorPhonenumber;
     private String Password;
 
     @OneToMany(mappedBy = "doctor")
@@ -28,16 +28,16 @@ public class Doctor {
     public Long getId(){
         return id;
     }
-    public String getName(){
-        return name;
+    public String getDoctorName(){
+        return doctorName;
     }
 
     public String getSpecializaion(){
         return specialization;
     }
 
-    public String getPhoneNumber(){
-        return phoneNumber;
+    public String getDoctorPhonenumber(){
+        return doctorPhonenumber;
     }
 
 
@@ -49,15 +49,15 @@ public class Doctor {
         return Password;
     }
 
-    public String getEmailId(){
-        return emailId;
+    public String getDoctorEmailId(){
+        return doctorEmailId;
     }
 
     public void setId(Long id){
         this.id = id;
     }
-    public void setName(String name){
-        this.name = name;
+    public void setDoctorName(String name){
+        this.doctorName = name;
     }
     public void setList(List<Patient> patients){
         this.patients = patients;
@@ -67,15 +67,15 @@ public class Doctor {
         this.specialization = specialization;
     }
 
-    public void setPhoneNumber(String phoneNumber){
-        this.phoneNumber = phoneNumber;
+    public void setDoctorPhonenumber(String phoneNumber){
+        this.doctorPhonenumber = phoneNumber;
     }
 
     public void setPassword(String Password){
         this.Password = Password;
     }
 
-    public void setEmailId(String emailId){
-        this.emailId = emailId;
+    public void setDoctorEmailId(String emailId){
+        this.doctorEmailId = emailId;
     }
 }

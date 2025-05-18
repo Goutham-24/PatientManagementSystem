@@ -53,30 +53,30 @@ class PatientManagementApplicationTests {
 		String username = "Someone@gmail.com";
 
 		PatientDto pdto = new PatientDto();
-		pdto.setName("relox");
-		pdto.setEmail("rolex@gmail.com");
-		pdto.setPhoneNumber("9177736351");
+		pdto.setPatientName("relox");
+		pdto.setPatientEmail("rolex@gmail.com");
+		pdto.setPatientPhonenumber("9177736351");
 
 		Doctor doctor = new Doctor();
-		doctor.setEmailId(username);
+		doctor.setDoctorEmailId(username);
 
-		when(Doctorrepo.findByEmailId(username)).thenReturn(Optional.of(doctor));
+		when(Doctorrepo.findByDoctorEmailId(username)).thenReturn(Optional.of(doctor));
 
 		ResponseEntity<String> res= patientServices.newPatientAdd(username,pdto);
 
 		assertEquals(HttpStatus.OK, res.getStatusCode());
 		assertEquals("The Patient has been added to the database successfully!", res.getBody());
 
-		verify(Doctorrepo,times(1)).findByEmailId(username);
+		verify(Doctorrepo,times(1)).findByDoctorEmailId(username);
 	}
 
 	@Test
 	void testDoctorAdd_returnStatus_whenPasswordProvided(){
 		Doctor doctor = new Doctor();
-		doctor.setName("Kurtz");
-		doctor.setEmailId("one@gmail.com");
+		doctor.setDoctorName("Kurtz");
+		doctor.setDoctorEmailId("one@gmail.com");
 		doctor.setSpecialization("eye specialist");
-		doctor.setPhoneNumber("9198827771");
+		doctor.setDoctorPhonenumber("9198827771");
 		doctor.setPassword("2222");
 
 		String originalPass = "2222";
@@ -103,7 +103,7 @@ class PatientManagementApplicationTests {
 		mdto.setPrescription("saline water rinse");
 
 		Doctor doctor = new Doctor();
-		doctor.setEmailId(username);
+		doctor.setDoctorEmailId(username);
 		
 		Patient patient = new Patient();
 		patient.setId((long) 1);
@@ -126,33 +126,33 @@ class PatientManagementApplicationTests {
 		String username = "Someone@gmail.com";
 
 		Doctor doctor = new Doctor();
-		doctor.setEmailId(username);
+		doctor.setDoctorEmailId(username);
 
 		List<Patient> patient = new ArrayList<>();
 
 		Patient p1 = new Patient();
-		p1.setName("name1");
-		p1.setEmail("name1@gmail.com");
-		p1.setPhoneNumber("111111111");
+		p1.setPatientName("name1");
+		p1.setPatientEmailId("name1@gmail.com");
+		p1.setPatientPhonenumber("111111111");
 
 		Patient p2 = new Patient();
-		p2.setName("name2");
-		p2.setEmail("name2@gmail.com");
-		p2.setPhoneNumber("222222222");
+		p2.setPatientName("name2");
+		p2.setPatientEmailId("name2@gmail.com");
+		p2.setPatientPhonenumber("222222222");
 		
 		patient.add(p1);
 		patient.add(p2);
 		doctor.setList(patient);
 
-		when(Doctorrepo.findByEmailId(username)).thenReturn(Optional.of(doctor));
+		when(Doctorrepo.findByDoctorEmailId(username)).thenReturn(Optional.of(doctor));
 
 		List<PatientDto> res = patientServices.totalPatient(username);
 
 		assertEquals(2, res.size());
-		assertEquals("name1", res.get(0).getName());
-		assertEquals("name2@gmail.com", res.get(1).getEmail());
+		assertEquals("name1", res.get(0).getPatientName());
+		assertEquals("name2@gmail.com", res.get(1).getPatientEmail());
 
-		verify(Doctorrepo,times(1)).findByEmailId(username);
+		verify(Doctorrepo,times(1)).findByDoctorEmailId(username);
 
 
 	}
@@ -163,14 +163,14 @@ class PatientManagementApplicationTests {
 		long patientId = 1;
 
 		Doctor doctor = new Doctor();
-		doctor.setEmailId(username);
+		doctor.setDoctorEmailId(username);
 
 		Patient patient = new Patient();
 		patient.setId((long)1);
-		patient.setName("Name1");
+		patient.setPatientName("Name1");
 		patient.setDoctor(doctor);
-		patient.setEmail("name1@gmail.com");
-		patient.setPhoneNumber("9191929298");
+		patient.setPatientEmailId("name1@gmail.com");
+		patient.setPatientPhonenumber("9191929298");
 		
 
 		when(Patientrepo.existsById(patientId)).thenReturn(true);
@@ -178,8 +178,8 @@ class PatientManagementApplicationTests {
 
 		PatientDto res = patientServices.singlePatient(username,patientId);
 
-		assertEquals("Name1", res.getName());
-		assertEquals("name1@gmail.com", res.getEmail());
+		assertEquals("Name1", res.getPatientName());
+		assertEquals("name1@gmail.com", res.getPatientEmail());
 
 		verify(Patientrepo,times(1)).existsById(patientId);
 		verify(Patientrepo,times(1)).GetPatientDetails(username,patientId);
@@ -191,14 +191,14 @@ class PatientManagementApplicationTests {
 		long patientId = 1;
 
 		Doctor doctor = new Doctor();
-		doctor.setEmailId(username);
+		doctor.setDoctorEmailId(username);
 
 		Patient patient = new Patient();
 		patient.setId((long)1);
-		patient.setName("Name1");
+		patient.setPatientName("Name1");
 		patient.setDoctor(doctor);
-		patient.setEmail("name1@gmail.com");
-		patient.setPhoneNumber("9191929298");
+		patient.setPatientEmailId("name1@gmail.com");
+		patient.setPatientPhonenumber("9191929298");
 
 		List<MedicalRecords> medrec = new ArrayList<>();
 
@@ -238,12 +238,12 @@ class PatientManagementApplicationTests {
 	void testAllDoctor_returnsDoctorDtoList(){
 		List<Doctor> doctors = new ArrayList<>();
 		Doctor d1 = new Doctor();
-        d1.setName("Dr. Shawn");
-        d1.setPhoneNumber("1234567890");
+        d1.setDoctorName("Dr. Shawn");
+        d1.setDoctorPhonenumber("1234567890");
         d1.setSpecialization("Surgery");
 		Doctor d2= new Doctor();
-		d2.setName("Dr. Aaron");
-		d2.setPhoneNumber("0987654321");
+		d2.setDoctorName("Dr. Aaron");
+		d2.setDoctorPhonenumber("0987654321");
 		d2.setSpecialization("Neurology");
 		doctors.add(d1);
 		doctors.add(d2);
@@ -251,8 +251,8 @@ class PatientManagementApplicationTests {
 		when(Doctorrepo.findAll()).thenReturn(doctors);
 		List<DoctorDto> res = patientServices.totalDoctor();
 		assertEquals(2, res.size());
-		assertEquals("Dr. Shawn", res.get(0).getName());
-		assertEquals("0987654321", res.get(1).getPhoneNumber());
+		assertEquals("Dr. Shawn", res.get(0).getDoctorName());
+		assertEquals("0987654321", res.get(1).getDoctorPhonenumber());
 		assertEquals("Surgery", res.get(0).getSpecialization());
 		assertEquals("Neurology", res.get(1).getSpecialization());
 		verify(Doctorrepo,times(1)).findAll();
@@ -262,23 +262,23 @@ class PatientManagementApplicationTests {
 	void testupdateDoctor_returnStatus_whenDoctorExists(){
 		String username = "shawn@gmail.com";
 		Doctor d = new Doctor();
-		d.setEmailId(username);
-		d.setName("Dr. Shawn");
-		d.setPhoneNumber("9191919191");
+		d.setDoctorEmailId(username);
+		d.setDoctorName("Dr. Shawn");
+		d.setDoctorPhonenumber("9191919191");
 		d.setSpecialization("Surgery");
 
 		DoctorDto updateDoctorDto = new DoctorDto();
-		updateDoctorDto.setName("Dr. Shawn Murphy");
-		updateDoctorDto.setPhoneNumber("9191919192");
+		updateDoctorDto.setDoctorName("Dr. Shawn Murphy");
+		updateDoctorDto.setDoctorPhonenumber("9191919192");
 		updateDoctorDto.setSpecialization("Cardiology");
 
-		when(Doctorrepo.findByEmailId(username)).thenReturn(Optional.of(d));
+		when(Doctorrepo.findByDoctorEmailId(username)).thenReturn(Optional.of(d));
 		ResponseEntity<String> res = patientServices.updateDoctor(username,updateDoctorDto);
 		assertEquals(HttpStatus.OK, res.getStatusCode());
 		assertEquals("The Doctor details have been Successfully updated!", res.getBody());
-		assertEquals("Dr. Shawn Murphy", d.getName());
-		assertEquals("9191919192", d.getPhoneNumber());
-		verify(Doctorrepo,times(1)).findByEmailId(username);
+		assertEquals("Dr. Shawn Murphy", d.getDoctorName());
+		assertEquals("9191919192", d.getDoctorPhonenumber());
+		verify(Doctorrepo,times(1)).findByDoctorEmailId(username);
 
 	}
 
@@ -287,20 +287,20 @@ class PatientManagementApplicationTests {
 		String username = "shawn@gmail.com";
 		long patientId = 1;
 		Patient p = new Patient();
-		p.setEmail("rolex1@gmail.com");
-		p.setPhoneNumber("9191919191");
+		p.setPatientEmailId("rolex1@gmail.com");
+		p.setPatientPhonenumber("9191919191");
 
 		PatientDto updatePatientDto = new PatientDto();
-		updatePatientDto.setEmail("rolex2@gmail.com");
-		updatePatientDto.setPhoneNumber("9191919192");
+		updatePatientDto.setPatientEmail("rolex2@gmail.com");
+		updatePatientDto.setPatientPhonenumber("9191919192");
 
 		when(Patientrepo.existsById(patientId)).thenReturn(true);
 		when(Patientrepo.GetPatientDetails(username,patientId)).thenReturn(Optional.of(p));
 		ResponseEntity<String> res = patientServices.updatePatient(username,patientId,updatePatientDto);
 		assertEquals(HttpStatus.OK, res.getStatusCode());
 		assertEquals("The Patient of ID " +patientId+ " has been successfully updated!", res.getBody());
-		assertEquals("rolex2@gmail.com", p.getEmail());
-		assertEquals("9191919192", p.getPhoneNumber());
+		assertEquals("rolex2@gmail.com", p.getPatientEmailId());
+		assertEquals("9191919192", p.getPatientPhonenumber());
 		verify(Patientrepo,times(1)).existsById(patientId);
 	}
 
@@ -310,8 +310,8 @@ class PatientManagementApplicationTests {
 		long patientId = 1;
 		Patient p = new Patient();
 		p.setId(patientId);
-		p.setEmail("rolex@gmail.com");
-		p.setPhoneNumber("9191919191");
+		p.setPatientEmailId("rolex@gmail.com");
+		p.setPatientPhonenumber("9191919191");
 
 		List<MedicalRecords> medrec = new ArrayList<>();
 		MedicalRecords m1 = new MedicalRecords();
@@ -346,7 +346,7 @@ class PatientManagementApplicationTests {
 		String username = "shawn@gmail.com";
 		long doctorId = 2;
 		Doctor d = new Doctor();
-		d.setEmailId(username);
+		d.setDoctorEmailId(username);
 		List<Patient> p = new ArrayList<>();
 		Patient p1 = new Patient();
 		Patient p2 = new Patient();
@@ -355,8 +355,8 @@ class PatientManagementApplicationTests {
 		d.setList(p);
 		Doctor d1 = new Doctor();
 		d1.setId(doctorId);
-		d1.setEmailId("aaron@gmail.com");
-		when(Doctorrepo.findByEmailId(username)).thenReturn(Optional.of(d));
+		d1.setDoctorEmailId("aaron@gmail.com");
+		when(Doctorrepo.findByDoctorEmailId(username)).thenReturn(Optional.of(d));
 		when(Doctorrepo.findById(doctorId)).thenReturn(Optional.of(d1));
 		ResponseEntity<String> res = patientServices.DeleteDoctor(username,doctorId);
 		assertEquals(HttpStatus.OK, res.getStatusCode());

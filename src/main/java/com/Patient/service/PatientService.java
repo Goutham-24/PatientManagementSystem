@@ -44,11 +44,11 @@ public class PatientService {
 
     public ResponseEntity<String> newPatientAdd(String user,PatientDto patient){
         Patient newPatient = new Patient();
-        newPatient.setName(patient.getName());
-        newPatient.setEmail(patient.getEmail());
-        newPatient.setPhoneNumber(patient.getPhoneNumber());
+        newPatient.setPatientName(patient.getPatientName());
+        newPatient.setPatientEmailId(patient.getPatientEmail());
+        newPatient.setPatientPhonenumber(patient.getPatientPhonenumber());
 
-        Doctor doctor= Doctorrepo.findByEmailId(user).orElseThrow(() -> new DoctorNotFoundException("Doctor not found!"));
+        Doctor doctor= Doctorrepo.findByDoctorEmailId(user).orElseThrow(() -> new DoctorNotFoundException("Doctor not found!"));
         newPatient.setDoctor(doctor);
         Patientrepo.save(newPatient);
         
@@ -58,7 +58,7 @@ public class PatientService {
 
     public ResponseEntity<String> DoctorInclusion(Doctor doctor){
 
-        Optional<Doctor> d = Doctorrepo.findByEmailId(doctor.getEmailId());
+        Optional<Doctor> d = Doctorrepo.findByDoctorEmailId(doctor.getDoctorEmailId());
 
         if(!d.isEmpty()){
             throw new IllegalArgumentException("email id already exists!");
@@ -95,15 +95,15 @@ public class PatientService {
 
     @Transactional
     public List<PatientDto> totalPatient(String user){
-        Doctor doc = Doctorrepo.findByEmailId(user).orElseThrow(()->new DoctorNotFoundException("Doctor Not found!"));
+        Doctor doc = Doctorrepo.findByDoctorEmailId(user).orElseThrow(()->new DoctorNotFoundException("Doctor Not found!"));
         List<Patient> l = doc.getList();
         List<PatientDto> pdto = new ArrayList<>();
         for(Patient i : l){
             PatientDto p = new PatientDto();
 
-            p.setName(i.getName());
-            p.setEmail(i.getEmail());
-            p.setPhoneNumber(i.getPhoneNumber());
+            p.setPatientName(i.getPatientName());
+            p.setPatientEmail(i.getPatientEmailId());
+            p.setPatientPhonenumber(i.getPatientPhonenumber());
             
             pdto.add(p);
         }
@@ -119,9 +119,9 @@ public class PatientService {
         Patient p =  Patientrepo.GetPatientDetails(user,PatientId).orElseThrow(()->new UserInvalidException("You are not allowed to access the patient!"));
 
         PatientDto pdto = new PatientDto();
-        pdto.setName(p.getName());
-        pdto.setEmail(p.getEmail());
-        pdto.setPhoneNumber(p.getPhoneNumber());
+        pdto.setPatientName(p.getPatientName());
+        pdto.setPatientEmail(p.getPatientEmailId());
+        pdto.setPatientPhonenumber(p.getPatientPhonenumber());
 
         return pdto;
     }
@@ -147,8 +147,8 @@ public class PatientService {
 
         for(Doctor i : docs){
             DoctorDto d = new DoctorDto();
-            d.setName(i.getName());
-            d.setPhoneNumber(i.getPhoneNumber());
+            d.setDoctorName(i.getDoctorName());
+            d.setDoctorPhonenumber(i.getDoctorPhonenumber());
             d.setSpecialization(i.getSpecializaion());
 
             dto.add(d);
@@ -158,11 +158,11 @@ public class PatientService {
     }
 
     public ResponseEntity<String> updateDoctor(String user,DoctorDto doctorDto){
-        Doctor doc = Doctorrepo.findByEmailId(user).orElseThrow(()-> new DoctorNotFoundException("Could not find ID "+user));
+        Doctor doc = Doctorrepo.findByDoctorEmailId(user).orElseThrow(()-> new DoctorNotFoundException("Could not find ID "+user));
 
-        doc.setName(doctorDto.getName());
+        doc.setDoctorName(doctorDto.getDoctorName());
         doc.setSpecialization(doctorDto.getSpecialization());
-        doc.setPhoneNumber(doctorDto.getPhoneNumber());
+        doc.setDoctorPhonenumber(doctorDto.getDoctorPhonenumber());
 
         Doctorrepo.save(doc);
         return ResponseEntity.ok("The Doctor details have been Successfully updated!");
@@ -174,8 +174,8 @@ public class PatientService {
         }
         Patient patient = Patientrepo.GetPatientDetails(user,PatientId).orElseThrow(()->new UserInvalidException("You are not allowed to access the patient!"));
 
-        patient.setEmail(patientDto.getEmail());
-        patient.setPhoneNumber(patientDto.getPhoneNumber());
+        patient.setPatientEmailId(patientDto.getPatientEmail());
+        patient.setPatientPhonenumber(patientDto.getPatientPhonenumber());
 
         Patientrepo.save(patient);
 
@@ -201,7 +201,7 @@ public class PatientService {
     }
 
     public ResponseEntity<String> DeleteDoctor(String user, long NewDoctorId){
-        Doctor doc = Doctorrepo.findByEmailId(user).orElseThrow(()-> new DoctorNotFoundException("Could not find ID "+user));
+        Doctor doc = Doctorrepo.findByDoctorEmailId(user).orElseThrow(()-> new DoctorNotFoundException("Could not find ID "+user));
         List<Patient> p = doc.getList();
         Doctor D = Doctorrepo.findById(NewDoctorId).orElseThrow(()-> new DoctorNotFoundException("Could not find Replacement Doctor ID "+NewDoctorId));
         for(Patient i : p){

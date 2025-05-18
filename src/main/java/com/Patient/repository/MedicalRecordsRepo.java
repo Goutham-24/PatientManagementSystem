@@ -13,7 +13,7 @@ import com.Patient.model.MedicalRecords;
 @Repository
 public interface MedicalRecordsRepo extends JpaRepository<MedicalRecords, Long> {
 
-    @Query("SELECT r FROM MedicalRecords r WHERE r.date <= :localdate AND r.patient.id = :PatientId AND r.patient.doctor.emailId = :user ORDER BY r.date DESC")
+    @Query("SELECT r FROM MedicalRecords r WHERE r.date <= :localdate AND r.patient.id = :PatientId AND r.patient.doctor.doctorEmailId = :user ORDER BY r.date DESC")
     List<MedicalRecords> GetMedicalRecords(@Param("user") String user,@Param("PatientId") long PatientId,@Param("localdate") LocalDate localdate);
 
 }

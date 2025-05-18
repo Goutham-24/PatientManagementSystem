@@ -20,10 +20,10 @@ public class DoctorService implements UserDetailsService{
 
      @Override
      public UserDetails loadUserByUsername(String username) {
-        Doctor doctor = Doctorrepo.findByEmailId(username).orElseThrow(() -> new DoctorNotFoundException("Doctor not found"));
+        Doctor doctor = Doctorrepo.findByDoctorEmailId(username).orElseThrow(() -> new DoctorNotFoundException("Doctor not found"));
 
         return new User(
-            doctor.getEmailId(),
+            doctor.getDoctorEmailId(),
             doctor.getPassword(),
             new ArrayList<>()
         );

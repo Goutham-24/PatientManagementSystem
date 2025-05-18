@@ -13,6 +13,6 @@ import com.Patient.model.Patient;
 @Repository
 public interface PatientRepo extends JpaRepository<Patient, Long> {
 
-    @Query("SELECT p FROM Patient p WHERE p.id = :PatientId AND p.doctor.emailId = :user")
+    @Query("SELECT p FROM Patient p WHERE p.id = :PatientId AND p.doctor.doctorEmailId = :user")
     Optional<Patient> GetPatientDetails(@Param("user") String user,@Param("PatientId") long PatientId);
 }

@@ -20,9 +20,9 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String email;
-    private String phoneNumber;
+    private String patientName;
+    private String patientEmailId;
+    private String patientPhonenumber;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id")
@@ -37,16 +37,16 @@ public class Patient {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getPatientName() {
+        return patientName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPatientEmailId() {
+        return patientEmailId;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPatientPhonenumber() {
+        return patientPhonenumber;
     }
 
     public Doctor getDoctor() {
@@ -62,16 +62,16 @@ public class Patient {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPatientName(String name) {
+        this.patientName = name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPatientEmailId(String email) {
+        this.patientEmailId = email;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPatientPhonenumber(String phoneNumber) {
+        this.patientPhonenumber = phoneNumber;
     }
 
     public void setDoctor(Doctor doctor) {

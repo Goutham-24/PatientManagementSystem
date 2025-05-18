@@ -6,27 +6,27 @@ import jakarta.validation.constraints.Pattern;
 
 public class PatientDto {
     @NotNull(message = "Name cannot be null")
-    private String name;
+    private String patientName;
     @Email(message = "Email should be valid")
     @NotNull(message = "Email cannot be null")
-    private String email;
+    private String patientEmail;
     @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "Phone number must be between 10 to 15 digits and can start with '+'")
     @NotNull(message = "Phone number cannot be null")
-    private String phoneNumber;
+    private String patientPhonenumber;
     
     private Long doctorId; 
 
 
-    public String getName() {
-        return name;
+    public String getPatientName() {
+        return patientName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPatientEmail() {
+        return patientEmail;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPatientPhonenumber() {
+        return patientPhonenumber;
     }
 
     public Long getDoctorId() {
@@ -35,16 +35,16 @@ public class PatientDto {
 
     
    
-    public void setName(String name) {
-        this.name = name;
+    public void setPatientName(String name) {
+        this.patientName = name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPatientEmail(String email) {
+        this.patientEmail = email;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPatientPhonenumber(String phoneNumber) {
+        this.patientPhonenumber = phoneNumber;
     }
 
     public void setDoctorId(Long doctorId) {
