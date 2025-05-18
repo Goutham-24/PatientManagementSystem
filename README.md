@@ -16,7 +16,7 @@ A robust backend RESTful API application developed using **Spring Boot** to help
   - Exposes RESTful API endpoints.  
   - Manages and validates incoming HTTP requests.
 
- - **Service Layer**  
+- **Service Layer**  
   - Contains all business logic.  
   - Handles data processing, validation, and authentication.
     
