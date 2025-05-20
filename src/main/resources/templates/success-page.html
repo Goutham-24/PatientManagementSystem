@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Success</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .logout-form {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .logout-form button {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-form button:hover {
+            background-color: #b02a37;
+        }
+
+        .card {
+            background: #fafafa;
+            padding: 20px 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 100px auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .card h2 {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logout button OUTSIDE the card, top-right corner -->
+    <form th:action="@{/logout}" method="post" class="logout-form">
+        <button type="submit">Logout</button>
+    </form>
+
+    <!-- Centered card with message -->
+    <div class="card">
+        <h2 th:text="${message}">Successfully added patient!</h2>
+    </div>
+
+</body>
+</html>

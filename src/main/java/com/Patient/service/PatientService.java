@@ -149,7 +149,7 @@ public class PatientService {
             DoctorDto d = new DoctorDto();
             d.setDoctorName(i.getDoctorName());
             d.setDoctorPhonenumber(i.getDoctorPhonenumber());
-            d.setSpecialization(i.getSpecializaion());
+            d.setSpecialization(i.getSpecialization());
 
             dto.add(d);
         }

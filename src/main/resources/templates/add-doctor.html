@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Doctor Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 40px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>Doctor Registration</h2>
+    <form th:action="@{/Thymeleaf/addDoctor}" th:object="${doctor}" method="post">
+        <label for="doctorName">Name:</label>
+        <input type="text" th:field="*{doctorName}" id="doctorName" required />
+
+        <label for="doctorEmailId">Email:</label>
+        <input type="email" th:field="*{doctorEmailId}" id="doctorEmailId" required />
+
+        <label for="doctorPhonenumber">Phone:</label>
+        <input type="text" th:field="*{doctorPhonenumber}" id="doctorPhonenumber" required />
+
+        <label for="specialization">Specialization:</label>
+        <input type="text" th:field="*{specialization}" id="specialization" required />
+
+        <label for="password">Password:</label>
+        <input type="password" th:field="*{password}" id="password" required />
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

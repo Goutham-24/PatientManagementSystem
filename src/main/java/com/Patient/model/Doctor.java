@@ -32,7 +32,7 @@ public class Doctor {
         return doctorName;
     }
 
-    public String getSpecializaion(){
+    public String getSpecialization(){
         return specialization;
     }
 

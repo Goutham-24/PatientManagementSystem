@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Patient Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 40px;
+            position: relative;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-container {
+            background-color: #fff;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .logout-form {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .logout-form button {
+            padding: 6px 12px;
+            font-size: 12px;
+            background-color: #d9534f;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .logout-form button:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+    <form th:action="@{/logout}" method="post" class="logout-form">
+        <button type="submit">Logout</button>
+    </form>
+
+    <h2>Patient Registration</h2>
+    <div class="form-container">
+        <form th:action="@{/Thymeleaf/addPatient}" th:object="${patient}" method="post">
+            <label for="patientName">Name:</label>
+            <input type="text" th:field="*{patientName}" id="patientName" required />
+
+            <label for="patientEmail">Email:</label>
+            <input type="email" th:field="*{patientEmail}" id="patientEmail" required />
+
+            <label for="patientPhonenumber">Phone:</label>
+            <input type="text" th:field="*{patientPhonenumber}" id="patientPhonenumber" required />
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

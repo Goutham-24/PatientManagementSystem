@@ -9,6 +9,7 @@ public class PatientDto {
     private String patientName;
     @Email(message = "Email should be valid")
     @NotNull(message = "Email cannot be null")
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@gmail\\.com$", message = "Must be a single valid Gmail address")
     private String patientEmail;
     @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "Phone number must be between 10 to 15 digits and can start with '+'")
     @NotNull(message = "Phone number cannot be null")
